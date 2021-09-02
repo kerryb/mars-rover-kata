@@ -33,5 +33,22 @@ defmodule MarsRover.RoverTest do
         assert %Rover{x: 0, y: 0, direction: @new_direction} = Rover.command(rover, @command)
       end
     end
+
+    for %{direction: direction, from: {current_x, current_y}, to: {new_x, new_y}} <- [
+          %{direction: :north, from: {2, 2}, to: {2, 3}},
+          %{direction: :east, from: {2, 2}, to: {3, 2}},
+          %{direction: :south, from: {2, 2}, to: {2, 1}},
+          %{direction: :west, from: {2, 2}, to: {1, 2}}
+        ] do
+      @direction direction
+      @current_x current_x
+      @current_y current_y
+      @new_x new_x
+      @new_y new_y
+      test "moves one square #{@direction} if facing #{@direction} and given the command \"M\"" do
+        rover = %Rover{x: @current_x, y: @current_y, direction: @direction}
+        assert %Rover{x: @new_x, y: @new_y, direction: @direction} = Rover.command(rover, "M")
+      end
+    end
   end
 end

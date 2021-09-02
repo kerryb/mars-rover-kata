@@ -15,6 +15,18 @@ defmodule MarsRover.Rover do
   def command(rover, "L") do
     %{rover | direction: @turn_left[rover.direction]}
   end
+
+  def command(rover, "M") do
+    %{rover | x: new_x(rover), y: new_y(rover)}
+  end
+
+  defp new_x(%{x: x, direction: :east}), do: x + 1
+  defp new_x(%{x: x, direction: :west}), do: x - 1
+  defp new_x(%{x: x}), do: x
+
+  defp new_y(%{y: y, direction: :north}), do: y + 1
+  defp new_y(%{y: y, direction: :south}), do: y - 1
+  defp new_y(%{y: y}), do: y
 end
 
 defimpl String.Chars, for: MarsRover.Rover do
