@@ -1,9 +1,11 @@
 defmodule MarsRover.Rover do
-  @enforce_keys [:x, :y, :direction]
-  defstruct [:x, :y, :direction]
+  alias MarsRover.Grid
+
+  @enforce_keys [:x, :y, :direction, :grid]
+  defstruct [:x, :y, :direction, :grid]
 
   def new do
-    %__MODULE__{x: 0, y: 0, direction: :north}
+    %__MODULE__{x: 0, y: 0, direction: :north, grid: %Grid{width: 10, height: 10}}
   end
 
   @turn_right %{north: :east, east: :south, south: :west, west: :north}
@@ -20,12 +22,12 @@ defmodule MarsRover.Rover do
     %{rover | x: new_x(rover), y: new_y(rover)}
   end
 
-  defp new_x(%{x: x, direction: :east}), do: x + 1
-  defp new_x(%{x: x, direction: :west}), do: x - 1
+  defp new_x(%{x: x, direction: :east} = rover), do: Integer.mod(x + 1, rover.grid.width)
+  defp new_x(%{x: x, direction: :west} = rover), do: Integer.mod(x - 1, rover.grid.width)
   defp new_x(%{x: x}), do: x
 
-  defp new_y(%{y: y, direction: :north}), do: y + 1
-  defp new_y(%{y: y, direction: :south}), do: y - 1
+  defp new_y(%{y: y, direction: :north} = rover), do: Integer.mod(y + 1, rover.grid.height)
+  defp new_y(%{y: y, direction: :south} = rover), do: Integer.mod(y - 1, rover.grid.height)
   defp new_y(%{y: y}), do: y
 end
 
