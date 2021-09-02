@@ -5,6 +5,10 @@ defmodule MarsRover.Rover do
   def new do
     %__MODULE__{x: 0, y: 0, direction: :north}
   end
+
+  def command(rover, "R") do
+    %{rover | direction: :east}
+  end
 end
 
 defimpl String.Chars, for: MarsRover.Rover do

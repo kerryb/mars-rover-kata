@@ -13,4 +13,18 @@ defmodule MarsRover.RoverTest do
       assert %Rover{x: 0, y: 0, direction: :north} = Rover.new()
     end
   end
+
+  describe "MarsRover.Rover.command/2" do
+    for %{command: command, from: current_direction, to: new_direction} <- [
+          %{command: "R", from: :north, to: :east}
+        ] do
+      @command command
+      @current_direction current_direction
+      @new_direction new_direction
+      test "turns to face #{@new_direction} if facing #{@current_direction} and given the command #{inspect(@command)}" do
+        rover = %Rover{x: 0, y: 0, direction: @current_direction}
+        assert %Rover{x: 0, y: 0, direction: @new_direction} = Rover.command(rover, @command)
+      end
+    end
+  end
 end
