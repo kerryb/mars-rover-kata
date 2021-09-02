@@ -1,6 +1,10 @@
 defmodule MarsRover.Rover do
   @enforce_keys [:x, :y, :direction]
   defstruct [:x, :y, :direction]
+
+  def new do
+    %__MODULE__{x: 0, y: 0, direction: :north}
+  end
 end
 
 defimpl String.Chars, for: MarsRover.Rover do
