@@ -16,7 +16,10 @@ defmodule MarsRover.RoverTest do
 
   describe "MarsRover.Rover.command/2" do
     for %{command: command, from: current_direction, to: new_direction} <- [
-          %{command: "R", from: :north, to: :east}
+          %{command: "R", from: :north, to: :east},
+          %{command: "R", from: :east, to: :south},
+          %{command: "R", from: :south, to: :west},
+          %{command: "R", from: :west, to: :north}
         ] do
       @command command
       @current_direction current_direction

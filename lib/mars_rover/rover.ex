@@ -6,8 +6,9 @@ defmodule MarsRover.Rover do
     %__MODULE__{x: 0, y: 0, direction: :north}
   end
 
+  @turn_right %{north: :east, east: :south, south: :west, west: :north}
   def command(rover, "R") do
-    %{rover | direction: :east}
+    %{rover | direction: @turn_right[rover.direction]}
   end
 end
 
