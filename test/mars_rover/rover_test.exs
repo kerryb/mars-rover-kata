@@ -19,7 +19,11 @@ defmodule MarsRover.RoverTest do
           %{command: "R", from: :north, to: :east},
           %{command: "R", from: :east, to: :south},
           %{command: "R", from: :south, to: :west},
-          %{command: "R", from: :west, to: :north}
+          %{command: "R", from: :west, to: :north},
+          %{command: "L", from: :north, to: :west},
+          %{command: "L", from: :east, to: :north},
+          %{command: "L", from: :south, to: :east},
+          %{command: "L", from: :west, to: :south}
         ] do
       @command command
       @current_direction current_direction

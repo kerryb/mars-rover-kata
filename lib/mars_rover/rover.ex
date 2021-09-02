@@ -10,6 +10,11 @@ defmodule MarsRover.Rover do
   def command(rover, "R") do
     %{rover | direction: @turn_right[rover.direction]}
   end
+
+  @turn_left %{north: :west, east: :north, south: :east, west: :south}
+  def command(rover, "L") do
+    %{rover | direction: @turn_left[rover.direction]}
+  end
 end
 
 defimpl String.Chars, for: MarsRover.Rover do
